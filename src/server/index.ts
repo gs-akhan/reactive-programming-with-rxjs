@@ -38,6 +38,7 @@ Promise.all([inert, susie]).then(() => {
         method: "GET",
         handler: (req, reply) => {
             reply["event"]({ id: 1, data: 'my data' });
+            reply["event"]("SOME DATA");
             reply["event"](null);
         }
     });

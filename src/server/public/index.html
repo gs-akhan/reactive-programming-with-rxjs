@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.3/require.min.js"></script>
+    <script src="./js/bundle.js"></script>
+</head>
+
+<body>
+    <h1>Hello</h1>
+    <script>
+        requirejs.config({
+            paths: {
+                rxjs: "https://cdnjs.cloudflare.com/ajax/libs/rxjs/5.2.0/Rx.min"
+            },
+            shim: {
+                "rxjs": {
+                    deps: []
+                }
+            }
+        });
+        requirejs(['index'], function(init){
+            init().subscribe(console.info, console.error, console.warn);
+        });
+    </script>
+    
+</body>
+
+</html>
