@@ -4,6 +4,8 @@ import * as Inert from "inert";
 import * as Susie from "susie";
 import * as Path from "path";
 
+import {SSE} from "./routes";
+
 let server = new Hapi.Server();
 
 server.connection({
@@ -33,23 +35,9 @@ Promise.all([inert, susie]).then(() => {
         }
     });
 
-    server.route({
-        path: "/events",
-        method: "GET",
-        handler: (req, reply) => {
-            //reply["event"]({ id: 1, data: 'my data' });
-            let count = 0;
-            let id = setInterval(function(){
-                if(count >10){
-                     reply["event"](null);
-                     clearInterval(id);
-                }else{
-                     reply["event"]({data:"Hi " + count});
-                }
-                count++;
-            }, 1000);
-        }
-    });
+    server.route([
+        SSE
+    ]);
 
     server
         .start()
