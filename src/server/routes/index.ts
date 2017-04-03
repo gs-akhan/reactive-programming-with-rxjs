@@ -15,9 +15,17 @@ export const SSE = {
                 reply["event"](null);
                 clearInterval(id);
             } else {
-                reply["event"]({ data: "Hi " + count });
+                reply["event"]({ id: count, data: 'hi'+count });
             }
             count++;
         }, 1000);
+    }
+};
+
+export const SIMPLE_RES = {
+    path: "/some_api",
+    method: "GET",
+    handler: (req, reply) => {
+        reply({data:"SOME DATA"});
     }
 };

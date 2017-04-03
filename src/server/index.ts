@@ -4,7 +4,7 @@ import * as Inert from "inert";
 import * as Susie from "susie";
 import * as Path from "path";
 
-import {SSE} from "./routes";
+import {SSE, SIMPLE_RES} from "./routes";
 
 let server = new Hapi.Server();
 
@@ -36,7 +36,8 @@ Promise.all([inert, susie]).then(() => {
     });
 
     server.route([
-        SSE
+        SSE,
+        SIMPLE_RES
     ]);
 
     server
