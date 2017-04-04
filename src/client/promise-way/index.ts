@@ -55,3 +55,28 @@ export function getEvents():Promise<any> {
 
     return promise;
 }
+
+
+export function upperCase(char){
+    let resolve, reject;
+    
+    let promise = new Promise(function(res, rej){
+       resolve = res;
+       reject = rej; 
+    });
+
+    let request = new XMLHttpRequest();
+    request.open("GET", "/uppercase/"+char);
+    request.onreadystatechange = (evt: Event): any => {
+        if(request["readyState"] === 4 && request.status === 200) {                        
+            resolve(request.responseText);
+        }
+    }
+    
+    request.onerror = (evt)=>{
+        (evt)=>reject(evt);
+    }    
+    request.send();
+
+    return promise;
+}

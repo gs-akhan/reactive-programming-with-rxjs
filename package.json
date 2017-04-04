@@ -12,6 +12,6 @@
     "twit": "^2.2.5"
   },
   "scripts": {
-    "start": "concurrently  \"tsc --p ./tsconfig-client.json -w\" \"tsc --p ./tsconfig-server.json -w\" \"nodemon --watch ./ --ignore node_modules/ --exec 'node src/server'\""
+    "start": "concurrently  \"tsc --p ./tsconfig-client.json -w\" \"tsc --p ./tsconfig-server.json -w\" \"nodemon --watch ./src/server --ignore node_modules/ --exec 'node src/server'\""
   }
 }

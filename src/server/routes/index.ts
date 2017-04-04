@@ -1,3 +1,4 @@
+import * as Hapi from "hapi";
 import * as Twit from "twit";
 const twitConf = require("../../twitter-conf.json");
 
@@ -27,5 +28,13 @@ export const SIMPLE_RES = {
     method: "GET",
     handler: (req, reply) => {
         reply({data:"SOME DATA"});
+    }
+};
+
+export const UPPERCASE = {
+    path: "/uppercase/{char}",
+    method: "GET",
+    handler: (req:Hapi.Request, reply) => {
+        reply(req.params.char.toUpperCase());
     }
 };
