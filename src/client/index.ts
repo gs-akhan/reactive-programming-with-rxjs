@@ -34,10 +34,19 @@ function init() {
             }, console.error, ()=>console.info("Complete"));*/
 
             Observable
-            .zip(trigger, trigger.mergeMap(v=>upperCase(alphabets[v])))
+            .zip(trigger, trigger.mergeMap(v=>upperCase(alphabets[v])))            
+            .bufferTime(2000)            
             .subscribe((v)=>{
                 console.info(v);                              
             }, console.error, ()=>console.info("Complete"));
     
 }
 export = init;
+
+/**
+ 1. example on login logout
+ 2. example com bining several interactions to enable disable features
+ 3. live text filtering
+ 4. twitter stream mapping
+
+ */
