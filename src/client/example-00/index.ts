@@ -1,6 +1,6 @@
 import {Observable, Scheduler} from "rxjs";
 declare var EventSource;
-import {getEvents, getData, upperCase} from "./promise-way";
+import {getEvents, getData, upperCase} from "./promise-way/index";
 import {getDataRxWay, getEventsRxWay} from "./rxjs-way";
 
 function init() {    

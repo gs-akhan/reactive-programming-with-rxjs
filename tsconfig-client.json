@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
         "module":"amd",
-        "outFile":"./src/server/public/js/bundle.js",
+        "outDir":"./src/server/public/js",
         "removeComments": true,
         "preserveConstEnums": true,
         "sourceMap": false,
