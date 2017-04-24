@@ -124,12 +124,10 @@ function renderAsIcons(data){
                     <div class="col-sm-6 col-md-4">
                         <div class="thumbnail">
                             <img src="${item.avatar}">
-                            <div class="caption">
+                            <div class="caption text-center">
                                 <h3>${item.first_name} ${item.last_name}</h3>
-                                <p>${item.age}, ${item.gender}, <span style="background-color:${item.favorite_color}" class="badge">&nbsp</span></p>
-                                <blockquote>
-                                    <p>${item.status_msg.substr(0, 20)}...</p>                                    
-                                </blockquote>
+                                <p>${item.age}, ${item.gender}, <span style="background-color:${item.favorite_color}" class="badge">&nbsp</span></p>                                
+                                <p>${item.status_msg.substr(0, 20)} ...</p>
                             </div>
                         </div>
                     </div>
