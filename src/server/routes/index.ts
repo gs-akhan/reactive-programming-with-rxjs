@@ -2,8 +2,8 @@ import * as Hapi from "hapi";
 import * as Twit from "twit";
 const twitConf = require("../../twitter-conf.json");
 
-var T = new Twit(twitConf);
-//var stream = T.stream('statuses/filter', { track: 'bahubali' })
+var T = new (Twit as any)(twitConf);
+
 
 export const SSE = {
     path: "/events",

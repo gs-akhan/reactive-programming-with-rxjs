@@ -1,6 +1,6 @@
 declare var EventSource;
 
-export function getData():Promise<any>{
+export function getData(url?:string):Promise<any>{
 
     let resolve, reject;
     
@@ -10,7 +10,7 @@ export function getData():Promise<any>{
     });
 
     let request = new XMLHttpRequest();
-    request.open("GET", "/some_api");
+    request.open("GET", url || "/some_api");
     request.onreadystatechange = (evt: Event): any => {
         if (request["readyState"] === 4 && request.status === 200) {            
             console.info("Received api data..");
