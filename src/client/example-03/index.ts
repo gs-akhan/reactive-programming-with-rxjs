@@ -1,14 +1,38 @@
 
 import {Observable} from "rxjs";
 import {getData} from "../example-00/promise-way/index";
-import {renderAsIcons, renderAsList, renderDetailed, renderItems} from "./renderers";
+import {renderAsIcons, renderAsList, renderDetailed, renderItems} from "../example-01/renderers";
 
 function init(){
-        
+
+    let search  = document.querySelector(".search") as HTMLSelectElement;
+    let refresh = document.querySelector(".refresh") as HTMLSelectElement;
     let sortOn  = document.querySelector(".slct") as HTMLSelectElement;
     let asList  = document.querySelector(".btn-group .list") as HTMLButtonElement;
     let details = document.querySelector(".btn-group .details") as HTMLButtonElement;
     let asIcons = document.querySelector(".btn-group .icons") as HTMLButtonElement;
+
+
+    let search$ = Observable
+                    .fromEvent(search, "keyup")                    
+                    .map((evt:any)=>evt.target.value)
+                    .startWith("");            
+                    
+    let refresh$ = Observable.fromEvent(refresh, "click").startWith(null);
+
+    
+    let source$ =  refresh$
+                    .combineLatest(search$)
+                    .map(v=>{                        
+                        return v[1];
+                    })
+                    .debounceTime(300)
+                    .flatMap(v=>getData("../js/MOCK_DATA.json" + (v!==""? ("?q"+v):"")))
+                    .map(data=>{                        
+                        let randomPick = Math.random()*100;
+                        return JSON.parse(data || '[]').slice(randomPick,randomPick+100);
+                    });
+                
 
     let sortOn$ = Observable
                     .fromEvent(sortOn, "change")
@@ -32,15 +56,10 @@ function init(){
                     .merge(list$)                    
                     .merge(details$)                    
                     .startWith({renderAs:"LIST"});
-    
-
-    let data = Observable
-                    .fromPromise(getData("../js/MOCK_DATA.json"))
-                    .map(data=>JSON.parse(data || '[]').slice(0,100));
 
     let events = Observable.combineLatest(sortOn$, renderAs$);
         
-        data
+        source$
         .combineLatest(events)
         .map(merged => {
             let [order, render] = merged[1];            
@@ -61,6 +80,5 @@ function init(){
             console.info("Finished");
         });
 }
-
 
 export = init;
