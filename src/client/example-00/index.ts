@@ -17,19 +17,33 @@ import {zipAll} from "./basics/zipAll";
 import {combineLatest} from "./basics/combineLatest";
 import {withLatestFrom} from "./basics/withLatestFrom";
 
+interface Module{
+    name:string,
+    menuItem:string,
+    start:()=>Observable<any>,
+    stop:()=>void
+}
+
 function init(){
     
-    let modules = [concat, concatMap,concatAll,merge, mergeMap, mergeAll,zip, zipAll,combineLatest,withLatestFrom];
-    let instances = [] as {
-                        menuItem:string,
-                        start:()=>Observable<any>,
-                        stop:()=>void
-                    }[];
+    let modules = [concat, concatMap,concatAll,merge, mergeMap, mergeAll, zip, zipAll, combineLatest, withLatestFrom];
+    let instances:{[key:string]:Module} = {};
     
     modules.forEach(module=>{
-        instances.push(module.init());
-        document.querySelector(".list-group").innerHTML += instances[instances.length-1].menuItem;
+                
+        let instance = module.init();
+        instances[instance.name] = instance;
+        document.querySelector(".list-group").innerHTML += instance.menuItem;
+
     });    
+
+    Observable
+            .fromEvent(document.querySelector(".list-group"), "click")
+            .map((evt:MouseEvent)=>{
+                evt.preventDefault();
+                return (evt.target as HTMLElement).attributes.getNamedItem('data-target').value;
+            })
+            .subscribe(console.info);
 }
 
 export = init;

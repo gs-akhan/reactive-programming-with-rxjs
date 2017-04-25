@@ -1,11 +1,15 @@
 import {helper} from "./helper";
 import {Observable} from "rxjs";
 
-export module concatMap{ 
+export module concatMap{
+    
     let _start = false;   
-    export function init(){
-        let menuItem =  helper.menu.replace(/\$\{NAME\}/i, "Concat Map");
+    let _name = "Concat Map"
+    
+    export function init(){        
+        let menuItem = helper.menu.replace(/\$\{NAME\}/ig, _name);
         return {
+            name:_name,
             menuItem,
             start(){
                 _start = true;

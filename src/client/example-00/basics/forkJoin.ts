@@ -2,10 +2,14 @@ import {helper} from "./helper";
 import {Observable} from "rxjs";
 
 export module combineLatest{
+    
     let _start = false;   
-    export function init(){
-        let menuItem = helper.menu.replace(/\$\{NAME\}/i, "Fork Join");
+    let _name = "Fork Join";
+    
+    export function init(){        
+        let menuItem = helper.menu.replace(/\$\{NAME\}/ig, _name);
         return {
+            name:_name,
             menuItem,
             start(){
                 _start = true;

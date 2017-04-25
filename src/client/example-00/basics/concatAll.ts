@@ -2,11 +2,14 @@ import {helper} from "./helper";
 import {Observable} from "rxjs";
 
 export module concatAll{
-    let _start = false;
     
-    export function init(){
-        let menuItem = helper.menu.replace(/\$\{NAME\}/i, "Concat All");
-       return {
+    let _start = false;   
+    let _name = "Concat All"
+    
+    export function init(){        
+        let menuItem = helper.menu.replace(/\$\{NAME\}/ig, _name);
+        return {
+            name:_name,
             menuItem,
             start(){
                 _start = true;

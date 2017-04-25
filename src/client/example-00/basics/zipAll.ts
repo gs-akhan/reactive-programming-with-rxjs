@@ -2,10 +2,14 @@ import {helper} from "./helper";
 import {Observable} from "rxjs";
 
 export module zipAll{
-    let _start = false;
-    export function init(){
-        let menuItem = helper.menu.replace(/\$\{NAME\}/i, "Zip All");
+    
+    let _start = false;   
+    let _name = "Zip All"
+    
+    export function init(){        
+        let menuItem = helper.menu.replace(/\$\{NAME\}/ig, _name);
         return {
+            name:_name,
             menuItem,
             start(){
                 _start = true;
