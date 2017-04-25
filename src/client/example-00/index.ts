@@ -1,52 +1,78 @@
 import {Observable, Scheduler} from "rxjs";
 declare var EventSource;
 import {getEvents, getData, upperCase} from "./promise-way/index";
-import {getDataRxWay, getEventsRxWay} from "./rxjs-way";
+import {getDataRxWay, getEventsRxWay} from "./rxjs-way/index";
 
-function init() {    
-    //getData().then(console.info).catch(console.error);
-    //getEvents().then(console.info).catch(console.error);
+import {concat} from "./basics/concat";
+import {merge} from "./basics/merge";
+import {zip} from "./basics/zip";
 
-    //getDataRxWay().subscribe(console.info, console.error);
-    //getEventsRxWay().subscribe(console.info, console.error);
+function init(){
 
-    let alphabets = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+    document.querySelector(".list-group").innerHTML = zip.init().menu;
+    /*//let users = getDataRxWay("../js/MOCK_DATA.json").map(res=> JSON.parse(res || '[]'));        
+    //users.subscribe(console.info, console.error)
     
+    //CONCAT
+
+    //MERGE
+
+    //ZIP
+
+    //CONCAT ALL
+
+    //MERGE ALL
+
+    //ZIP ALL
+
+    //FORK JOIN
     
-    let trigger = Observable.interval(1000).take(alphabets.length);
-        trigger.map(v=>[v, upperCase(alphabets[v])])
-        //.subscribe(console.info, console.error);
+    //CONCAT MAP
 
-        Observable
-            .from(alphabets)
-            .zip(trigger)
-            .merge(v=>upperCase(alphabets[v[0]]))
-            //.subscribe(console.info, console.error, ()=>console.info("Complete"));
+    //MERGE MAP (FLAT MAP)    
 
-        /*trigger
-            .mergeMap(v=>{
-                return Observable
-                            .fromPromise(upperCase(alphabets[v]))
-                            .map(a=>[v,a])
-            })
-            .subscribe((v)=>{
-                console.info(v);                              
-            }, console.error, ()=>console.info("Complete"));*/
+    //SWITCH MAP
 
-            Observable
-            .zip(trigger, trigger.mergeMap(v=>upperCase(alphabets[v])))            
-            .bufferTime(2000)            
-            .subscribe((v)=>{
-                console.info(v);                              
-            }, console.error, ()=>console.info("Complete"));
+    //COMBINE LATEST
+    //Joins any latest value from one observable with most recent value from other 
+    //inactive/collecting observables (irrespective source emission)    
+    var [x, y] = [1000, 500];
+    Observable
+        .interval(x)      
+        .map(val=>val + " after " + (val*x) +"sec")              
+        .combineLatest(Observable.interval(y).map(val=>val + " after " + (val*y) +"sec")    )
+        .take(10)
+        //.subscribe(console.info, console.error)
+
+    //WITH LATEST FROM
+    //whenever the source emits a value, 
+    //joins most recent values from all other collecting observables
+    //(with respect to source changes..)    
+    Observable
+        .interval(x)
+        .map(val=>val + " after " + (val*x) +"sec")    
+        .withLatestFrom(Observable.interval(y).map(val=>val + " after " + (val*y) +"sec"))        
+        .take(10)
+        //.subscribe(console.info, console.error)
+
+    //FILTER
+
+    //PLUCK
+
+    //REDUCE
+
+    //SCAN
+
+
+    //START WITH
+
+    //DO*/
+
+
     
+
+
+
 }
+
 export = init;
-
-/**
- 1. example on login logout
- 2. example com bining several interactions to enable disable features
- 3. live text filtering
- 4. twitter stream mapping
-
- */

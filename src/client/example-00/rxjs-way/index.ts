@@ -1,12 +1,12 @@
 declare var EventSource;
 import {Observable, Observer} from "rxjs";
 
-export function getDataRxWay():Observable<any>{
+export function getDataRxWay(url?:string):Observable<any>{
 
     return Observable.create(function(obs:Observer<any>){
 
         let request = new XMLHttpRequest();
-            request.open("GET", "/some_api");
+            request.open("GET", url || "/some_api");
             request.onreadystatechange = (evt: Event): any => {
                 if (request["readyState"] === 4 && request.status === 200) {            
                     console.info("Received api data..");
