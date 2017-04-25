@@ -13,14 +13,27 @@ export module concatAll{
             menuItem,
             start(){
                 _start = true;
-                return Observable
-                            .interval(1000)
-                            .mapTo(_name)
-                            .takeWhile(v=>_start);
+                return concatAllExample();
             },
             stop(){
                 _start = false;
             }
         };
+    }
+
+    function concatAllExample(){        
+        let source1$ =  Observable
+                            .interval(1000)
+                            .map(i=>"S1:"+helper.alphabet[i])
+                            .takeWhile(v=>_start)
+                            .take(10);
+
+        let source2$ = Observable
+                            .interval(500)
+                            .map(i=>Observable.of("S2:"+helper.alphabet[i].toUpperCase()).delay(Math.random()*1000))
+                            .takeWhile(v=>_start)
+                            .take(10);
+
+          return source1$.concat
     }
 }

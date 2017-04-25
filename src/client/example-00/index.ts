@@ -50,6 +50,7 @@ function init(){
             })
             .do(()=>{
                 Object.keys(instances).forEach(key=>instances[key].stop());
+                console.clear();
             })
             .switchMap(key=>instances[key].start())
             .subscribe(console.info);

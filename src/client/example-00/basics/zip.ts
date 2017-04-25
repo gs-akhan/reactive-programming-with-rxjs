@@ -29,7 +29,7 @@ export module zip{
                             .take(10);
 
         let source2$ = Observable
-                            .interval(5000)
+                            .interval(500)
                             .map(i=>helper.alphabet[i].toUpperCase())
                             .takeWhile(v=>_start)
                             .take(10);

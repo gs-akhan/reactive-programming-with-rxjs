@@ -24,13 +24,13 @@ export module merge{
     function mergeExample(){        
         let source1$ =  Observable
                             .interval(1000)
-                            .map(i=>helper.alphabet[i])
+                            .map(i=>"S1:"+helper.alphabet[i])
                             .takeWhile(v=>_start)
                             .take(10);
 
         let source2$ = Observable
                             .interval(500)
-                            .map(i=>helper.alphabet[i].toUpperCase())
+                            .map(i=>"S2:"+helper.alphabet[i].toUpperCase())
                             .takeWhile(v=>_start)
                             .take(10);
 

@@ -13,14 +13,27 @@ export module mergeAll{
             menuItem,
             start(){
                 _start = true;
-                return Observable
-                            .interval(1000)
-                            .mapTo(_name)
-                            .takeWhile(v=>_start);
+                return mergeAllExample();
             },
             stop(){
                 _start = false;
             }
         };
+    }
+
+    function mergeAllExample(){        
+        let source1$ =  Observable
+                            .interval(1000)
+                            .map(i=>helper.alphabet[i])
+                            .takeWhile(v=>_start)
+                            .take(10);
+
+        let source2$ = Observable
+                            .interval(500)
+                            .map(i=>helper.alphabet[i].toUpperCase())
+                            .takeWhile(v=>_start)
+                            .take(10);
+
+          return Observable.merge(source1$).mergeMap(v=>Observable.zip(Observable.of(v),source1$))
     }
 }
