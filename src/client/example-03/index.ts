@@ -23,9 +23,7 @@ function init(){
     
     let source$ =  refresh$
                     .combineLatest(search$)
-                    .map(v=>{                        
-                        return v[1];
-                    })
+                    .map(v=>v[1])
                     .debounceTime(300)
                     .flatMap(v=>getData("../js/MOCK_DATA.json" + (v!==""? ("?q"+v):"")))
                     .map(data=>{                        
