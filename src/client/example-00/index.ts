@@ -18,9 +18,17 @@ import {combineLatest} from "./basics/combineLatest";
 import {withLatestFrom} from "./basics/withLatestFrom";
 
 function init(){
+    
     let modules = [concat, concatMap,concatAll,merge, mergeMap, mergeAll,zip, zipAll,combineLatest,withLatestFrom];
+    let instances = [] as {
+                        menuItem:string,
+                        start:()=>Observable<any>,
+                        stop:()=>void
+                    }[];
+    
     modules.forEach(module=>{
-        document.querySelector(".list-group").innerHTML += module.init().menuItem;
+        instances.push(module.init());
+        document.querySelector(".list-group").innerHTML += instances[instances.length-1].menuItem;
     });    
 }
 
