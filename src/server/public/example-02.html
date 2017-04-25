@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.3/require.min.js"></script>    
+</head>
+
+<body>
+    <h1>Hello</h1>
+    <script>
+        requirejs.config({
+            paths: {
+                rxjs: "https://cdnjs.cloudflare.com/ajax/libs/rxjs/5.2.0/Rx.min"
+            },
+            shim: {
+                "rxjs": {
+                    deps: []
+                }
+            }
+        });
+        requirejs(['js/example-02/index'], function(init){
+            init();//.subscribe(console.info, console.error, console.warn);
+        });
+        
+    </script>
+    <div class="app container-fluid">
+        <div class="row">
+            <div class="col-sm-4 col-lg-2">
+                <div class="form-group">
+                    <select class="slct form-control">
+                        <option value="first_name">Frist Name</option>
+                        <option value="last_name">Last Name</option>
+                        <option value="age">Age </option>
+                        <option value="gender">Gender</option>
+                        <option value="favorite_color">Favorite Color</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-4 col-lg-4">            
+                <div class="btn-group" role="group" aria-label="...">
+                    <button value="LIST" type="button" class="list btn btn-default">List</button>
+                    <button value="DETAILS" type="button" class="details btn btn-default">Details</button>
+                    <button value="ICONS" type="button" class="icons btn btn-default">Icons</button>
+                </div>
+            </div>  
+
+            <div class="col-sm-4 col-lg-4">            
+                <button value="REFRESH" type="button" class="btn btn-default refresh glyphicon glyphicon-refresh"></button>
+            </div>  
+
+        </div>
+        <div style="height:600px; overflow-y:auto;" class="user-list container">
+
+        </div>
+
+    </div>
+</body>
+
+</html>
