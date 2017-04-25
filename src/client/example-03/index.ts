@@ -37,7 +37,8 @@ function init(){
     let sortOn$ = Observable
                     .fromEvent(sortOn, "change")
                     .map((evt:any)=>({sortOn:evt.target.value}))
-                    .startWith({sortOn:"first_name"});
+                    .startWith({sortOn:"first_name"})
+                    //.distinctUntilKeyChanged("sortOn");
     
     let list$ = Observable
                     .fromEvent(asList, "click")
@@ -55,7 +56,8 @@ function init(){
                     .merge(asIcons$)
                     .merge(list$)                    
                     .merge(details$)                    
-                    .startWith({renderAs:"LIST"});
+                    .startWith({renderAs:"LIST"})
+                    //.distinctUntilKeyChanged("renderAs");
 
     let events = Observable.combineLatest(sortOn$, renderAs$);
         
