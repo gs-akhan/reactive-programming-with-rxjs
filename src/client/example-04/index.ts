@@ -5,6 +5,8 @@ import {renderAsIcons, renderAsList, renderDetailed, renderItems} from "../examp
 
 function init(){
 
+    let loadingMsg = document.querySelector(".loading-message") as HTMLDivElement;
+
     let search  = document.querySelector(".search") as HTMLSelectElement;
     let refresh = document.querySelector(".refresh") as HTMLSelectElement;
     let sortOn  = document.querySelector(".slct") as HTMLSelectElement;
@@ -25,11 +27,16 @@ function init(){
                     .combineLatest(search$)
                     .map(v=>v[1])
                     .debounceTime(300)
+                    .do(()=>{
+                        loadingMsg.style.display = "block";
+                    })
                     .flatMap(v=>getData("../js/MOCK_DATA.json" + (v!==""? ("?q"+v):"")))
-                    .map(data=>{                        
+                    .delay(1000)
+                    .map(data=>{                                                
                         let randomPick = Math.random()*100;
-                        return JSON.parse(data || '[]').slice(randomPick,randomPick+100)
-                    });                
+                        return JSON.parse(data || '[]').slice(randomPick,randomPick+100);
+                    });
+                
 
     let sortOn$ = Observable
                     .fromEvent(sortOn, "change")
@@ -73,7 +80,10 @@ function init(){
             
             return renderItems(data, render.renderAs);
         })
-        .subscribe((processed)=>{            
+        .do(()=>{
+            loadingMsg.style.display = "none";       
+        })
+        .subscribe((processed)=>{                 
             let ctn = document.querySelector(".user-list");
             ctn.innerHTML = processed;
             console.info("Finished");
