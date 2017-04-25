@@ -14,14 +14,30 @@ export module concat{
             menuItem,
             start(){
                 _start = true;
-                return Observable
-                            .interval(1000)
-                            .mapTo(_name)
-                            .takeWhile(v=>_start);
+                return concatExample();
             },
             stop(){
                 _start = false;
             }
         };
     }
+
+    function concatExample(){        
+        let source1$ =  Observable
+                            .interval(1000)
+                            .map(i=>helper.alphabet[i])
+                            .takeWhile(v=>_start)
+                            .take(10);
+
+        let source2$ = Observable
+                            .interval(500)
+                            .map(i=>helper.alphabet[i].toUpperCase())
+                            .takeWhile(v=>_start)
+                            .take(10);
+
+          return source1$.concat(source2$);
+
+    }
+
 }
+
