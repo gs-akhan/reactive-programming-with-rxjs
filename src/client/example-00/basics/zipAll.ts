@@ -1,6 +1,9 @@
-import {template} from "./template";
-export module concatMap{
+import {helper} from "./helper";
+export module zipAll{
     export function init(){
-        return template;
+        let menuItem = helper.menu.replace(/\$\{NAME\}/i, "Zip All");
+        return {
+            menuItem
+        };
     }
 }

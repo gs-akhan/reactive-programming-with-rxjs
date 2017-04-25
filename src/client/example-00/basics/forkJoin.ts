@@ -1,6 +1,9 @@
-import {template} from "./template";
-export module mergeMap{
+import {helper} from "./helper";
+export module forkJoin{
     export function init(){
-        return template;
+        let menuItem = helper.menu.replace(/\$\{NAME\}/i, "Fork Join");
+        return {
+            menuItem
+        };
     }
 }

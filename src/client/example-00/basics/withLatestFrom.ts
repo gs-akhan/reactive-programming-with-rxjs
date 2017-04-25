@@ -1,6 +1,9 @@
-import {template} from "./template";
-export module mergeMap{
+import {helper} from "./helper";
+export module withLatestFrom{
     export function init(){
-        return template;
+        let menuItem = helper.menu.replace(/\$\{NAME\}/i, "With Latest From");
+        return {
+            menuItem
+        };
     }
 }

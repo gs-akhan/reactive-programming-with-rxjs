@@ -1,6 +1,9 @@
-import {template} from "./template";
-export module mergeMap{
+import {helper} from "./helper";
+export module combineLatest{
     export function init(){
-        return template;
+        let menuItem = helper.menu.replace(/\$\{NAME\}/i, "Combine Latest");
+        return {
+            menuItem
+        };
     }
 }

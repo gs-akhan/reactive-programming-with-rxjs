@@ -1,6 +1,9 @@
-import {template} from "./template";
+import {helper} from "./helper";
 export module concat{
     export function init(){
-        return template;
+        let menuItem = helper.menu.replace(/\$\{NAME\}/i, "Concat");
+        return {
+            menuItem
+        };
     }
 }
