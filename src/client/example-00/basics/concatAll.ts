@@ -15,6 +15,7 @@ export module concatAll{
                 _start = true;
                 return Observable
                             .interval(1000)
+                            .mapTo(_name)
                             .takeWhile(v=>_start);
             },
             stop(){

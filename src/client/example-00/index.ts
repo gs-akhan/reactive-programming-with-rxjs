@@ -26,7 +26,7 @@ interface Module{
 
 function init(){
     
-    let modules = [concat, concatMap,concatAll,merge, mergeMap, mergeAll, zip, zipAll, combineLatest, withLatestFrom];
+    let modules = [concat, concatMap, concatAll, merge, mergeMap, mergeAll, zip, zipAll, combineLatest, withLatestFrom];
     let instances:{[key:string]:Module} = {};
     
     modules.forEach(module=>{
@@ -38,12 +38,17 @@ function init(){
     });    
 
     Observable
-            .fromEvent(document.querySelector(".list-group"), "click")
+            .fromEvent(document.querySelector(".list-group"), "click")            
             .map((evt:MouseEvent)=>{
                 evt.preventDefault();
                 return (evt.target as HTMLElement).attributes.getNamedItem('data-target').value;
             })
+            .do(()=>{
+                Object.keys(instances).forEach(key=>instances[key].stop());
+            })
+            .switchMap(key=>instances[key].start())
             .subscribe(console.info);
+            
 }
 
 export = init;

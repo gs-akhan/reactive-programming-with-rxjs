@@ -15,6 +15,7 @@ export module zipAll{
                 _start = true;
                 return Observable
                             .interval(1000)
+                            .mapTo(_name)
                             .takeWhile(v=>_start);
             },
             stop(){
