@@ -21,20 +21,26 @@ export module concatAll{
         };
     }
 
-    function concatAllExample(){        
+    function concatAllExample(){  
+
+        let colors1 = helper.colors.concat([]);
+        let colors2 = helper.colors.concat([]);
+
         let source1$ =  Observable
-                            .interval(1000)
-                            .map(i=>"S1:"+helper.alphabet[i])
+                            .interval(2000)
+                            .map(v=>({color:colors1.shift(), x:20, txt:"S1:"+v}))
                             .takeWhile(v=>_start)
                             .take(10);
 
         let source2$ = Observable
-                            .interval(500)
-                            .map(i=>Observable.of("S2:"+helper.alphabet[i].toUpperCase()).delay(Math.random()*1000))
+                            .interval(1000)
+                            .map(v=>helper.alphabet[v].toUpperCase())
+                            .map(v=>Observable.of({color:colors2.shift(), x:80, txt:"S2:"+v}))                            
                             .takeWhile(v=>_start)
                             .take(10)
                             .concatAll();
 
-          return source1$
+          return source1$.concat(source2$);
+
     }
 }
