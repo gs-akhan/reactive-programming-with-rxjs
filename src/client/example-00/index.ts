@@ -48,8 +48,7 @@ function init(){
                 evt.preventDefault();
                 return evt.target.attributes.getNamedItem('data-target').value;
             })
-            .do(()=>{
-                Object.keys(instances).forEach(key=>instances[key].stop());
+            .do(()=>{                
                 console.clear();
             })
             .switchMap(key=>instances[key].start())

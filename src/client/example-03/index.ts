@@ -24,8 +24,10 @@ function init(){
     let source$ =  refresh$
                     .combineLatest(search$)
                     .map(v=>v[1])
-                    .debounceTime(300)
-                    .flatMap(v=>getData("../js/MOCK_DATA.json" + (v!==""? ("?q"+v):"")))
+                    //reduce multiple cuncurrent calls made by rapid clicks
+                    .debounceTime(300) 
+                    //incase of multiple calls, subscribe to the latest..
+                    .switchMap(v=>getData("../js/MOCK_DATA.json" + (v!==""? ("?q"+v):""))) 
                     .map(data=>{                        
                         let randomPick = Math.random()*100;
                         return JSON.parse(data || '[]').slice(randomPick,randomPick+100)

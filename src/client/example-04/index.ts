@@ -30,7 +30,7 @@ function init(){
                     .do(()=>{
                         loadingMsg.style.display = "block";
                     })
-                    .flatMap(v=>getData("../js/MOCK_DATA.json" + (v!==""? ("?q"+v):"")))
+                    .switchMap(v=>getData("../js/MOCK_DATA.json" + (v!==""? ("?q"+v):"")))
                     .delay(1000)
                     .map(data=>{                                                
                         let randomPick = Math.random()*100;

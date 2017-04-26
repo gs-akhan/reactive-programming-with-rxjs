@@ -32,8 +32,9 @@ export module concatAll{
                             .interval(500)
                             .map(i=>Observable.of("S2:"+helper.alphabet[i].toUpperCase()).delay(Math.random()*1000))
                             .takeWhile(v=>_start)
-                            .take(10);
+                            .take(10)
+                            .concatAll();
 
-          return source1$.concat
+          return source1$
     }
 }
