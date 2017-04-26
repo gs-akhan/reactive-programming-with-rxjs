@@ -23,24 +23,15 @@ export module mergeAll{
 
     function mergeAllExample(){  
 
-        let colors1 = helper.colors.concat([]);
-        let colors2 = helper.colors.concat([]);
-
-        let source1$ =  Observable
-                            .interval(2000)
-                            .map(v=>({color:colors1.shift(), x:20, txt:"S1:"+v}))
-                            .takeWhile(v=>_start)
-                            .take(10);
-
-        let source2$ = Observable
-                            .interval(1000)
-                            .map(v=>helper.alphabet[v].toUpperCase())
-                            .map(v=>Observable.of({color:colors2.shift(), x:80, txt:"S2:"+v}))                            
-                            .takeWhile(v=>_start)
-                            .take(10)
-                            .mergeAll();
-
-          return source1$.merge(source2$);
+        return Observable.timer(0, 3000).take(5).map(s=>{
+               s = s+1;
+               return  Observable
+                        .timer(0, 1000+Math.random()*1000)
+                        .map(v=>helper.alphabet[v].toUpperCase())
+                        .map(v=>({color:helper.getRandomColor(), x:s*80, txt:"S"+s+":"+v}))
+                        .takeWhile(v=>_start)                             
+                        .take(10);
+        }).mergeAll();
 
     }
 }

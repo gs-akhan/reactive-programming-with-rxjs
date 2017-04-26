@@ -14,6 +14,7 @@ import {mergeMap} from "./basics/mergeMap";
 import {mergeAll} from "./basics/mergeAll";
 
 import {zip} from "./basics/zip";
+import {zipAll} from "./basics/zipAll";
 import {forkJoin} from "./basics/forkJoin";
 
 import {_switch} from "./basics/switch";
@@ -35,10 +36,9 @@ function init(){
     
     let modules = [
                     map, 
-                    concat, merge, zip, forkJoin, 
-                    concatAll, mergeAll, _switch, 
-                    concatMap, mergeMap, switchMap,                     
-                    combineLatest, withLatestFrom
+                    concat, merge, zip, forkJoin, combineLatest, withLatestFrom,
+                    concatAll, mergeAll, _switch, zipAll,
+                    concatMap, mergeMap, switchMap                    
                 ];
     let instances:{[key:string]:Module} = {};
     

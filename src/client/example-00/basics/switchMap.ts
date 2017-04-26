@@ -13,14 +13,26 @@ export module switchMap{
             menuItem,
             start(){
                 _start = true;
-                return Observable
-                            .interval(1000)
-                            .mapTo(_name)
-                            .takeWhile(v=>_start);
+                return switchMapExample();
             },
             stop(){
                 _start = false;
             }
         };
+    }
+
+    function switchMapExample(){  
+
+        return Observable.timer(0, 6000).take(5)
+            .switchMap(s=>{
+                s = s+1;
+                return  Observable
+                            .timer(0, 1000+Math.random()*1000)
+                            .map(v=>helper.alphabet[v].toUpperCase())
+                            .map(v=>({color:helper.getRandomColor(), x:s*80, txt:"S"+s+":"+v}))
+                            .takeWhile(v=>_start)                             
+                            .take(10);
+            });
+
     }
 }
