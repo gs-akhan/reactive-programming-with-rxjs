@@ -9,8 +9,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.3/require.min.js"></script>    
 </head>
 
-<body>
-    <h1>Hello</h1>
+<body>    
     <script>
         requirejs.config({
             paths: {
@@ -27,7 +26,22 @@
         });
         
     </script>
-    <div class="app container-fluid">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">RxJs Basics</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="/">Home</a></li>
+                <li><a href="./example-00.html">Basics</a></li>
+                <li><a href="./example-01.html">Interaction &amp; fetch 1</a></li>
+                <li><a href="./example-02.html">Interaction &amp; fetch 2</a></li>
+                <li><a href="./example-03.html">Interaction &amp; fetch 3</a></li>
+                <li><a href="./example-04.html">Interaction &amp; fetch 4</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class=" container-fluid">
         <div class="row">
             <div class="col-sm-4 col-lg-2">
                 <div class="form-group">
@@ -53,7 +67,7 @@
             </div>  
 
         </div>
-        <div style="height:600px; overflow-y:auto;" class="user-list container">
+        <div style="height:600px; overflow-y:auto;" class="user-list container-fluid">
 
         </div>
 
