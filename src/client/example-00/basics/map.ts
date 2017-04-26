@@ -1,12 +1,14 @@
 import {helper} from "./helper";
 import {Observable} from "rxjs";
+import {Drawing} from "../../visualisation/index";
 
-export module switchMap{
+export module map{
     
     let _start = false;   
-    let _name = "Switch Map (map + switch)";
+    let _name = "Map";
     
-    export function init(){        
+    export function init(){       
+        let colors = helper.colors.concat([]); 
         let menuItem = helper.menu.replace(/\$\{NAME\}/ig, _name);
         return {
             name:_name,
@@ -15,8 +17,9 @@ export module switchMap{
                 _start = true;
                 return Observable
                             .interval(1000)
-                            .mapTo(_name)
-                            .takeWhile(v=>_start);
+                            .map(v=>({color:colors.shift(), x:20, txt:"S1:"+v}))
+                            .takeWhile(v=>_start)
+                            .take(10)                            
             },
             stop(){
                 _start = false;

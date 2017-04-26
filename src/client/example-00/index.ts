@@ -1,7 +1,9 @@
 import {Observable, Scheduler} from "rxjs";
-declare var EventSource;
+import {Drawing} from "../visualisation/index";
 import {getEvents, getData, upperCase} from "./promise-way/index";
 import {getDataRxWay, getEventsRxWay} from "./rxjs-way/index";
+
+import {map} from "./basics/map";
 
 import {concat} from "./basics/concat";
 import {concatMap} from "./basics/concatMap";
@@ -12,7 +14,10 @@ import {mergeMap} from "./basics/mergeMap";
 import {mergeAll} from "./basics/mergeAll";
 
 import {zip} from "./basics/zip";
-import {zipAll} from "./basics/zipAll";
+import {forkJoin} from "./basics/forkJoin";
+
+import {_switch} from "./basics/switch";
+import {switchMap} from "./basics/switchMap";
 
 import {combineLatest} from "./basics/combineLatest";
 import {withLatestFrom} from "./basics/withLatestFrom";
@@ -24,12 +29,15 @@ interface Module{
     stop:()=>void
 }
 
+declare var createjs:any;
+
 function init(){
     
     let modules = [
-                    concat, merge, zip, 
-                    concatAll, mergeAll, zipAll, 
-                    concatMap, mergeMap, 
+                    map, 
+                    concat, merge, zip, forkJoin, 
+                    concatAll, mergeAll, _switch, 
+                    concatMap, mergeMap, switchMap,                     
                     combineLatest, withLatestFrom
                 ];
     let instances:{[key:string]:Module} = {};
@@ -42,18 +50,27 @@ function init(){
 
     });    
 
-    Observable
-            .fromEvent(document.querySelector(".list-group"), "click")            
-            .map((evt:any)=>{
-                evt.preventDefault();
-                return evt.target.attributes.getNamedItem('data-target').value;
-            })
-            .do(()=>{                
-                console.clear();
-            })
-            .switchMap(key=>instances[key].start())
-            .subscribe(console.info);
-            
+    let latest = Observable
+                    .fromEvent(document.querySelector(".list-group") as Element, "click")            
+                    .map((evt:any)=>{
+                        evt.preventDefault();
+                        return evt.target.attributes.getNamedItem('data-target').value;
+                    })
+                    .do(()=>{                
+                        reset();
+                    })
+                    .map(key=>instances[key].start())
+                    .switch();
+                                        
+    
+     Drawing.init(latest);
 }
+
+function reset(){
+    console.clear();
+    Drawing.clear();
+    Drawing.start();
+}
+
 
 export = init;

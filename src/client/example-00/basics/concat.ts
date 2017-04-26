@@ -1,6 +1,7 @@
 import {helper} from "./helper";
 import {getEventsRxWay} from "../rxjs-way/index";
 import {Observable} from "rxjs"; 
+import {Drawing} from "../../visualisation/index";
 
 export module concat{
     
@@ -22,16 +23,21 @@ export module concat{
         };
     }
 
-    function concatExample(){        
+    function concatExample(){  
+        
+        let colors1 = helper.colors.concat([]);
+        let colors2 = helper.colors.concat([]);
+
         let source1$ =  Observable
-                            .interval(1000)
-                            .map(i=>"S1:"+helper.alphabet[i])
+                            .interval(1500)
+                            .map(v=>({color:colors1.shift(), x:20, txt:"S1:"+v}))
                             .takeWhile(v=>_start)
                             .take(10);
 
         let source2$ = Observable
-                            .interval(500)
-                            .map(i=>"S2:"+helper.alphabet[i].toUpperCase())
+                            .interval(1000)
+                            .map(v=>helper.alphabet[v].toUpperCase())
+                            .map(v=>({color:colors2.shift(), x:80, txt:"S2:"+v}))
                             .takeWhile(v=>_start)
                             .take(10);
 

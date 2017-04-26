@@ -4,7 +4,8 @@
 <head>
     <title></title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.3/require.min.js"></script>    
 </head>
@@ -21,8 +22,11 @@
     </nav>
     <div class="container">
         <div class="row">
-            <div class="col-sm-4 col-md-3">
+            <div class="col-sm-5 col-md-4">
                 <ul class="list-group"></ul>
+            </div>
+            <div class="col-sm-7 col-md-8">
+                <canvas id="drawing" width="500" height="600"></canvas>
             </div>
         </div>         
     </div>

@@ -4,7 +4,7 @@ import {Observable} from "rxjs";
 export module concatMap{
     
     let _start = false;   
-    let _name = "Concat Map"
+    let _name = "Concat Map (map + concatAll)"
     
     export function init(){        
         let menuItem = helper.menu.replace(/\$\{NAME\}/ig, _name);

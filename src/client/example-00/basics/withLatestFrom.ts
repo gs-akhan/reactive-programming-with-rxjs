@@ -1,5 +1,6 @@
 import {helper} from "./helper";
 import {Observable} from "rxjs";
+import {Drawing} from "../../visualisation/index";
 
 export module withLatestFrom{
     
@@ -13,14 +14,32 @@ export module withLatestFrom{
             menuItem,
             start(){
                 _start = true;
-                return Observable
-                            .interval(1000)
-                            .mapTo(_name)
-                            .takeWhile(v=>_start);
+                return withLatestFromExample()
             },
             stop(){
                 _start = false;
             }
         };
+    }
+
+    function withLatestFromExample(){        
+        
+        let colors1 = helper.colors.concat([]);
+        let colors2 = helper.colors.concat([]);
+
+        let source1$ =  Observable
+                            .interval(1000)
+                            .map(v=>({color:helper.getRandomColor(), x:20, txt:"S1:"+v}))
+                            .takeWhile(v=>_start)
+                            .take(15);
+
+        let source2$ = Observable
+                            .interval(500)
+                            .map(v=>helper.alphabet[v].toUpperCase())
+                            .map(v=>({color:helper.getRandomColor(), x:80, txt:"S2:"+v}))
+                            .takeWhile(v=>_start)
+                            .take(15);
+
+          return source1$.withLatestFrom(source2$);
     }
 }

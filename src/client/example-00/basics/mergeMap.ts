@@ -4,7 +4,7 @@ import {Observable} from "rxjs";
 export module mergeMap{
     
     let _start = false;   
-    let _name = "Mege Map"
+    let _name = "Mege Map (map + mergeAll)"
     
     export function init(){        
         let menuItem = helper.menu.replace(/\$\{NAME\}/ig, _name);

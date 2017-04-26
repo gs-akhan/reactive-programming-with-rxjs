@@ -1,5 +1,6 @@
 import {helper} from "./helper";
 import {Observable} from "rxjs";
+import {Drawing} from "../../visualisation/index";
 
 export module zip{
     
@@ -21,16 +22,21 @@ export module zip{
         };
     }
 
-    function zipExample(){        
+    function zipExample(){   
+
+        let colors1 = helper.colors.concat([]);
+        let colors2 = helper.colors.concat([]);
+
         let source1$ =  Observable
                             .interval(1000)
-                            .map(i=>helper.alphabet[i])
+                            .map(v=>({color:colors1.shift(), x:20, txt:"S1:"+v}))
                             .takeWhile(v=>_start)
                             .take(10);
 
         let source2$ = Observable
                             .interval(500)
-                            .map(i=>helper.alphabet[i].toUpperCase())
+                            .map(v=>helper.alphabet[v].toUpperCase())
+                            .map(v=>({color:colors2.pop(), x:80, txt:"S2:"+v}))
                             .takeWhile(v=>_start)
                             .take(10);
 
