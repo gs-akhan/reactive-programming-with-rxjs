@@ -2,7 +2,7 @@ import * as Hapi from "hapi";
 import * as Twit from "twit";
 const twitConf = require("../../twitter-conf.json");
 
-var T = new (Twit as any)(twitConf);
+//var T = new (Twit as any)(twitConf);
 
 
 export const SSE = {
