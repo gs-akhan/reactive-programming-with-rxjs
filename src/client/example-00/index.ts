@@ -1,7 +1,7 @@
 import {Observable, Scheduler} from "rxjs";
 import {Drawing} from "../visualisation/index";
 import {getEvents, getData, upperCase} from "./promise-way/index";
-import {getDataRxWay, getEventsRxWay} from "./rxjs-way/index";
+import {getData as getDataRxWay, getEvents as getEventsRxWay} from "./rxjs-way/index";
 
 import {map} from "./basics/map";
 
@@ -71,6 +71,5 @@ function reset(){
     Drawing.clear();
     Drawing.start();
 }
-
 
 export = init;

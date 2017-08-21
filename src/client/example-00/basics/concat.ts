@@ -1,5 +1,4 @@
 import {helper} from "./helper";
-import {getEventsRxWay} from "../rxjs-way/index";
 import {Observable} from "rxjs"; 
 import {Drawing} from "../../visualisation/index";
 
