@@ -1,7 +1,7 @@
 declare var EventSource;
 import {Observable, Observer} from "rxjs";
 
-export function getDataRxWay(url?:string):Observable<any>{
+export function getData(url?:string):Observable<any>{
 
     return Observable.create(function(obs:Observer<any>){
 
@@ -32,7 +32,7 @@ export function getDataRxWay(url?:string):Observable<any>{
 
 }
 
-export function getEventsRxWay():Observable<any>{
+export function getEvents():Observable<any>{
 
     return Observable.create(function(obs:Observer<any>){
 

@@ -56,8 +56,10 @@
                 }
             }
         });
-        requirejs(['js/example-00/index'], function(init){
-            init();//.subscribe(console.info, console.error, console.warn);
+        requirejs(['js/example-00/rxjs-way/index'], function(module){
+            module
+                .getEvents()
+                .subscribe(console.info, console.error, ()=>console.log("Complete   "));
         });
         
     </script>

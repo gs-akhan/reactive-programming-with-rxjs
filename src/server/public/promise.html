@@ -20,7 +20,6 @@
                 <li><a href="/">Home</a></li>
                 <li><a href="./promise.html">Promise</a></li>
                 <li><a href="./reactive.html">Reactive</a></li>
-                <li><a href="./example-00.html">Basics</a></li>
                 <li><a href="./example-01.html">Interaction &amp; fetch 1</a></li>
                 <li><a href="./example-02.html">Interaction &amp; fetch 2</a></li>
                 <li><a href="./example-03.html">Interaction &amp; fetch 3</a></li>
@@ -56,8 +55,11 @@
                 }
             }
         });
-        requirejs(['js/example-00/index'], function(init){
-            init();//.subscribe(console.info, console.error, console.warn);
+        requirejs(['js/example-00/promise-way/index'], function(module){
+            module
+                .getEvents()
+                .then(console.info)
+                .catch(console.error);
         });
         
     </script>
