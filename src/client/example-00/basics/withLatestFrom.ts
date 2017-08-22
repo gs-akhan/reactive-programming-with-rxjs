@@ -35,7 +35,7 @@ export module withLatestFrom{
 
         let source2$ = Observable
                             .interval(500)
-                            .map(v=>helper.alphabet[v].toUpperCase())
+                            //.map(v=>helper.alphabet[v].toUpperCase())
                             .map(v=>({color:helper.getRandomColor(), x:80, txt:"S2:"+v}))
                             .takeWhile(v=>_start)
                             .take(15);

@@ -35,10 +35,10 @@ export module zip{
 
         let source2$ = Observable
                             .interval(500)
-                            .map(v=>helper.alphabet[v].toUpperCase())
+                            //.map(v=>helper.alphabet[v].toUpperCase())
                             .map(v=>({color:colors2.pop(), x:80, txt:"S2:"+v}))
                             .takeWhile(v=>_start)
-                            .take(10);
+                            .take(15);
 
           return source1$.zip(source2$);
     }

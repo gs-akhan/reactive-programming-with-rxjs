@@ -35,7 +35,7 @@ export module combineLatest{
 
         let source2$ = Observable
                             .interval(1000)
-                            .map(v=>helper.alphabet[v].toUpperCase())
+                            //.map(v=>helper.alphabet[v].toUpperCase())
                             .map(v=>({color:helper.getRandomColor(), x:80, txt:"S2:"+v}))
                             .takeWhile(v=>_start)
                             .take(15);

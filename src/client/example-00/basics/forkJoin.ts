@@ -34,7 +34,7 @@ export module forkJoin{
 
         let source2$ = Observable
                             .interval(1000)
-                            .map(v=>helper.alphabet[v].toUpperCase())
+                            //.map(v=>helper.alphabet[v].toUpperCase())
                             .map(v=>({color:colors2.shift(), x:80, txt:"S2:"+v}))
                             .takeWhile(v=>_start)
                             .take(2);
