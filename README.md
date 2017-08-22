@@ -1,5 +1,5 @@
 ## RxJS examples
 
-```npm install && npm start```
+```npm install nodemon -g && npm install && npm start```
 
 go to http://localhost:8085
